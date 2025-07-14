@@ -6,7 +6,7 @@ const fileCache = localForage.createInstance({
 	name: 'fileCache',
 });
 
-export const unpkgPathPlugin = () => {
+export const unpkgPathPlugin = (inputCode: string) => {
 	return {
 		name: 'unpkg-path-plugin',
 		setup(build: esbuild.PluginBuild) {
@@ -38,13 +38,7 @@ export const unpkgPathPlugin = () => {
 				if (args.path === 'index.js') {
 					return {
 						loader: 'jsx',
-						contents: `
-              // import message from 'tiny-test-pkg';
-							import reactSelect from 'react-select';
-
-							console.log(react, useState, reactDOM);
-							
-            `,
+						contents: inputCode,
 					};
 				}
 
